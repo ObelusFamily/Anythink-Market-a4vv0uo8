@@ -43,6 +43,6 @@ jobs:
 
       - name: Wilco checks
         id: Wilco
-        uses: trywilco/actions@main
+        uses: trywilco/actions@v3
         with:
           engine: ${{ secrets.WILCO_ENGINE_URL }}
