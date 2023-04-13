@@ -4,6 +4,7 @@ from app.db.errors import EntityDoesNotExist
 from app.db.repositories.items import ItemsRepository
 from app.models.domain.items import Item
 from app.models.domain.users import User
+import openai
 
 
 async def check_item_exists(items_repo: ItemsRepository, slug: str) -> bool:
@@ -21,3 +22,14 @@ def get_slug_for_item(title: str) -> str:
 
 def check_user_can_modify_item(item: Item, user: User) -> bool:
     return item.seller.username == user.username
+
+
+def get_image(image_str: str) -> str:
+    if not image_str:
+        response = openai.Image.create(
+            prompt="a white siamese cat",
+            n=1,
+            size="1024x1024"
+        )
+        return response['data'][0]['url']
+    return image_str
