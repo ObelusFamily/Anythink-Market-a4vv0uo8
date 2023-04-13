@@ -21,3 +21,6 @@ def get_slug_for_item(title: str) -> str:
 
 def check_user_can_modify_item(item: Item, user: User) -> bool:
     return item.seller.username == user.username
+
+def get_image(image_str: str) -> str:
+    return image_str
