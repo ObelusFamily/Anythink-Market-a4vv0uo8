@@ -22,7 +22,7 @@ from app.models.schemas.items import (
     ListOfItemsInResponse,
 )
 from app.resources import strings
-from app.services.items import check_item_exists, get_slug_for_item
+from app.services.items import check_item_exists, get_slug_for_item, get_image
 from app.services.event import send_event
 
 router = APIRouter()
@@ -75,7 +75,7 @@ async def create_new_item(
         body=item_create.body,
         seller=user,
         tags=item_create.tags,
-        image=item_create.image
+        image=get_image(item_create.image)
     )
     send_event('item_created', {'item': item_create.title})
     return ItemInResponse(item=ItemForResponse.from_orm(item))
